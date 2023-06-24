@@ -1,5 +1,6 @@
 package com.devyash.basicsindepthpractice
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.devyash.basicsindepthpractice.databinding.ActivitySecondBinding
@@ -14,7 +15,13 @@ class SecondActivity : AppCompatActivity() {
         _binding  = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val username = intent.getStringExtra("USERNAME")
 
+        binding.tvUser.text = "Hello, ${username.toString()}"
+
+        val intent = Intent(this@SecondActivity,MainActivity::class.java)
+        intent.putExtra("CHECKUSER","Yes, User Exist")
+        setResult(111,intent)
     }
 
     override fun onDestroy() {
