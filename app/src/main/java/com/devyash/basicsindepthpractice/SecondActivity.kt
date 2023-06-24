@@ -15,13 +15,17 @@ class SecondActivity : AppCompatActivity() {
         _binding  = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        val username = intent.getStringExtra("USERNAME")
+//
+//        binding.tvUser.text = "Hello, ${username.toString()}"
+//
+//        val intent = Intent(this@SecondActivity,MainActivity::class.java)
+//        intent.putExtra("CHECKUSER","Yes, User Exist")
+//        setResult(111,intent)
+
         val username = intent.getStringExtra("USERNAME")
 
         binding.tvUser.text = "Hello, ${username.toString()}"
-
-        val intent = Intent(this@SecondActivity,MainActivity::class.java)
-        intent.putExtra("CHECKUSER","Yes, User Exist")
-        setResult(111,intent)
     }
 
     override fun onDestroy() {
