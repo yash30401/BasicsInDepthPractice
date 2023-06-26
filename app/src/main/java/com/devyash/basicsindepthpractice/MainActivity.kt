@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
+        /*
+* New ActivityResultLauncher Method*/
         binding.btnCheckUser.setOnClickListener {
             contract.launch(binding.etName.text.toString())
         }
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Trying onActivityResult Here Old Method
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //

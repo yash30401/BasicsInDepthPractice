@@ -15,6 +15,7 @@ class SecondActivity : AppCompatActivity() {
         _binding  = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /*Old method getting Result and setting Result*/
 //        val username = intent.getStringExtra("USERNAME")
 //
 //        binding.tvUser.text = "Hello, ${username.toString()}"
@@ -23,8 +24,8 @@ class SecondActivity : AppCompatActivity() {
 //        intent.putExtra("CHECKUSER","Yes, User Exist")
 //        setResult(111,intent)
 
+        /*Now you don't have to call setResult for setting the Result*/
         val username = intent.getStringExtra("USERNAME")
-
         binding.tvUser.text = "Hello, ${username.toString()}"
     }
 

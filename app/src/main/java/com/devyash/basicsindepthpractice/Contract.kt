@@ -4,6 +4,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 
+
+/*
+* New ActivityResultLauncher Method
+* */
 class Contract: ActivityResultContract<String,String>() {
     override fun createIntent(context: Context, input: String): Intent {
         val intent = Intent(context,SecondActivity::class.java)
