@@ -31,6 +31,8 @@ class SecondActivity : AppCompatActivity() {
 //        intent.putExtra("CHECKUSER","Yes, User Exist")
 //        setResult(111,intent)
 
+        Log.d(TAG, "onCreate: Calling Second Activity")
+
         /*Now you don't have to call setResult for setting the Result*/
         val username = intent.getStringExtra("USERNAME")
         binding.tvUser.text = "Hello, ${username.toString()}"
@@ -42,7 +44,7 @@ class SecondActivity : AppCompatActivity() {
     * */
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart: Calling")
+        Log.d(TAG, "onStart: Calling Second Activity")
     }
 
     /* onResume():-
@@ -51,7 +53,7 @@ class SecondActivity : AppCompatActivity() {
     * */
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume: Calling")
+        Log.d(TAG, "onResume: Calling Second Activity")
     }
 
     /* onPause():-
@@ -59,7 +61,7 @@ class SecondActivity : AppCompatActivity() {
     * */
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "onPause: Calling")
+        Log.d(TAG, "onPause: Calling Second Activity")
     }
 
     /* onStop():-
@@ -67,7 +69,7 @@ class SecondActivity : AppCompatActivity() {
     * */
     override fun onStop() {
         super.onStop()
-        Log.d(TAG, "onStop: Calling")
+        Log.d(TAG, "onStop: Calling Second Activity")
     }
 
     /* onRestart():-
@@ -75,7 +77,7 @@ class SecondActivity : AppCompatActivity() {
     * */
     override fun onRestart() {
         super.onRestart()
-        Log.d(TAG, "onRestart: Calling")
+        Log.d(TAG, "onRestart: Calling Second Activity")
     }
 
     /* onDestoryed():-
@@ -85,7 +87,7 @@ class SecondActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        Log.d(TAG, "onDestroy: Calling")
+        Log.d(TAG, "onDestroy: Calling Second Activity")
     }
 
 }
