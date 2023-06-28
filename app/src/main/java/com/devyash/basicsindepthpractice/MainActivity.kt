@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.devyash.basicsindepthpractice.Constants.TAG
 import com.devyash.basicsindepthpractice.databinding.ActivityMainBinding
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModel
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    private val contract = registerForActivityResult(Contract()){
+    private val contract = registerForActivityResult(Contract()) {
         binding.tvCheckUserExist.text = it
     }
 
@@ -37,15 +38,21 @@ class MainActivity : AppCompatActivity() {
         /*
         * New ActivityResultLauncher Method
         * */
+        setText()
         binding.btnCheckUser.setOnClickListener {
-            contract.launch(binding.etName.text.toString())
+//            contract.launch(binding.etName.text.toString())
             increaseCounter()
         }
 
 
     }
+
     private fun increaseCounter() {
         viewModel.increaseCount()
+        setText()
+    }
+
+    private fun setText() {
         binding.tvCount.text = "Counter:- ${viewModel.count.toString()}"
     }
 
