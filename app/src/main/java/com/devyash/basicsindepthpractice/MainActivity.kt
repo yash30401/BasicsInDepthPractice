@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.devyash.basicsindepthpractice.Constants.TAG
 import com.devyash.basicsindepthpractice.databinding.ActivityMainBinding
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModel
+import com.devyash.basicsindepthpractice.viewmodels.UserViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,13 +20,14 @@ class MainActivity : AppCompatActivity() {
         binding.tvCheckUserExist.text = it
     }
 
-    private val viewModel by viewModels<UserViewModel>()
+    private lateinit var viewModel:UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel = ViewModelProvider(this,UserViewModelFactory(10)).get(UserViewModel::class.java)
 //        binding.btnCheckUser.setOnClickListener {
 //            val username = binding.etName.text.toString()
 //            val intent = Intent(this@MainActivity, SecondActivity::class.java)
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         * */
         setText()
         binding.btnCheckUser.setOnClickListener {
-//            contract.launch(binding.etName.text.toString())
+            contract.launch(binding.etName.text.toString())
             increaseCounter()
         }
 
@@ -49,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun increaseCounter() {
         viewModel.increaseCount()
+        Log.d(TAG, "increaseCounter: ${viewModel.count}")
         setText()
     }
 
