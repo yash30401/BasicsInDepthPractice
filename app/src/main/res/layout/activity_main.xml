@@ -38,5 +38,15 @@
         app:layout_constraintStart_toStartOf="@+id/btnCheckUser"
         app:layout_constraintTop_toBottomOf="@+id/btnCheckUser" />
 
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Counter:- 0"
+        app:layout_constraintEnd_toEndOf="@+id/btnCheckUser"
+        app:layout_constraintStart_toStartOf="@+id/btnCheckUser"
+        app:layout_constraintTop_toBottomOf="@+id/tvCheckUserExist" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

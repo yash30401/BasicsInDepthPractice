@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import com.devyash.basicsindepthpractice.Constants.TAG
 import com.devyash.basicsindepthpractice.databinding.ActivityMainBinding
+import com.devyash.basicsindepthpractice.viewmodels.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     private val contract = registerForActivityResult(Contract()){
         binding.tvCheckUserExist.text = it
     }
+
+    private val viewModel by viewModels<UserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +39,14 @@ class MainActivity : AppCompatActivity() {
         * */
         binding.btnCheckUser.setOnClickListener {
             contract.launch(binding.etName.text.toString())
+            increaseCounter()
         }
 
 
+    }
+    private fun increaseCounter() {
+        viewModel.increaseCount()
+        binding.tvCount.text = "Counter:- ${viewModel.count.toString()}"
     }
 
     // Trying onActivityResult Here Old Method
