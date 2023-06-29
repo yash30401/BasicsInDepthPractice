@@ -44,10 +44,12 @@ class MainActivity : AppCompatActivity() {
         binding.btnCheckUser.setOnClickListener {
             contract.launch(binding.etName.text.toString())
             increaseCounter()
+            setResourcesStringText()
         }
 
 
     }
+
 
     private fun increaseCounter() {
         viewModel.increaseCount()
@@ -58,6 +60,11 @@ class MainActivity : AppCompatActivity() {
     private fun setText() {
         binding.tvCount.text = "Counter:- ${viewModel.count.toString()}"
     }
+
+    private fun setResourcesStringText() {
+       binding.tvLoremIpsum.text = resources.getString(R.string.lorem_ipsum)
+    }
+
 
     // Trying onActivityResult Here Old Method
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
