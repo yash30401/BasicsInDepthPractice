@@ -21,14 +21,14 @@ class MainActivity : AppCompatActivity() {
         binding.tvCheckUserExist.text = it
     }
 
-    private lateinit var viewModel:UserViewModel
+    private lateinit var viewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this,UserViewModelFactory(10)).get(UserViewModel::class.java)
+        viewModel = ViewModelProvider(this, UserViewModelFactory(10)).get(UserViewModel::class.java)
 //        binding.btnCheckUser.setOnClickListener {
 //            val username = binding.etName.text.toString()
 //            val intent = Intent(this@MainActivity, SecondActivity::class.java)
@@ -49,13 +49,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnRedirect.setOnClickListener {
-            Intent(Intent.ACTION_MAIN).also{
-                it.`package` = "com.healthcare.yash.preeti"
-                try {
-                    startActivity(it)
-                }catch (e:ActivityNotFoundException){
-                    e.printStackTrace()
-                }
+//            Intent(Intent.ACTION_MAIN).also{
+//                it.`package` = "com.google.android.youtube"
+//                try {
+//                    startActivity(it)
+//                }catch (e:ActivityNotFoundException){
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
+
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_EMAIL, arrayOf("test@test.com"))
+                putExtra(Intent.EXTRA_SUBJECT, "Test Subject")
+                putExtra(Intent.EXTRA_TEXT, "Test Text")
+            }
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
             }
         }
 
@@ -73,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setResourcesStringText() {
-       binding.tvLoremIpsum.text = resources.getString(R.string.lorem_ipsum)
+        binding.tvLoremIpsum.text = resources.getString(R.string.lorem_ipsum)
     }
 
 
