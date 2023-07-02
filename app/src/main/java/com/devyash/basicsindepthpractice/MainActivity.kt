@@ -1,5 +1,6 @@
 package com.devyash.basicsindepthpractice
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -47,6 +48,16 @@ class MainActivity : AppCompatActivity() {
             setResourcesStringText()
         }
 
+        binding.btnRedirect.setOnClickListener {
+            Intent(Intent.ACTION_MAIN).also{
+                it.`package` = "com.healthcare.yash.preeti"
+                try {
+                    startActivity(it)
+                }catch (e:ActivityNotFoundException){
+                    e.printStackTrace()
+                }
+            }
+        }
 
     }
 
