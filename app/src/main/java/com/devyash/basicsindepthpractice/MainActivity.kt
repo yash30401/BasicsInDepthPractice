@@ -2,11 +2,13 @@ package com.devyash.basicsindepthpractice
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.devyash.basicsindepthpractice.BroadcastReciever.AirPlaneModeReceiver
 import com.devyash.basicsindepthpractice.Constants.TAG
 import com.devyash.basicsindepthpractice.databinding.ActivityMainBinding
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModel
@@ -22,12 +24,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var viewModel: UserViewModel
-
+    private val airPlaneModeReceiver = AirPlaneModeReceiver()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        registerReceiver(
+            airPlaneModeReceiver,
+            IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        )
         viewModel = ViewModelProvider(this, UserViewModelFactory(10)).get(UserViewModel::class.java)
 //        binding.btnCheckUser.setOnClickListener {
 //            val username = binding.etName.text.toString()
@@ -147,6 +152,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        unregisterReceiver(airPlaneModeReceiver)
         Log.d(TAG, "onDestroy: Calling Main Activity")
     }
 }
