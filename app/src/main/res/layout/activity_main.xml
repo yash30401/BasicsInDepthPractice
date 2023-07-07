@@ -48,20 +48,6 @@
         app:layout_constraintStart_toStartOf="@+id/btnCheckUser"
         app:layout_constraintTop_toBottomOf="@+id/tvCheckUserExist" />
 
-    <TextView
-        android:id="@+id/tvLoremIpsum"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRedirect" />
-
     <Button
         android:id="@+id/btnRedirect"
         android:layout_width="wrap_content"
@@ -71,6 +57,26 @@
         app:layout_constraintEnd_toEndOf="@+id/tvCount"
         app:layout_constraintStart_toStartOf="@+id/tvCount"
         app:layout_constraintTop_toBottomOf="@+id/tvCount" />
+
+    <Button
+        android:id="@+id/btnStartSerivce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Start Foreground Service"
+        app:layout_constraintEnd_toEndOf="@+id/btnRedirect"
+        app:layout_constraintStart_toStartOf="@+id/btnRedirect"
+        app:layout_constraintTop_toBottomOf="@+id/btnRedirect" />
+
+    <Button
+        android:id="@+id/btnStopService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Stop Foreground Service"
+        app:layout_constraintEnd_toEndOf="@+id/btnStartSerivce"
+        app:layout_constraintStart_toStartOf="@+id/btnStartSerivce"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartSerivce" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

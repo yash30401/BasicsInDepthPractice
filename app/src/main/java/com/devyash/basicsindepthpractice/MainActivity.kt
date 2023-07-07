@@ -1,16 +1,20 @@
 package com.devyash.basicsindepthpractice
 
+import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.devyash.basicsindepthpractice.BroadcastReciever.AirPlaneModeReceiver
 import com.devyash.basicsindepthpractice.Constants.TAG
 import com.devyash.basicsindepthpractice.databinding.ActivityMainBinding
+import com.devyash.basicsindepthpractice.services.RunningService
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModel
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModelFactory
 
@@ -33,6 +37,11 @@ class MainActivity : AppCompatActivity() {
             airPlaneModeReceiver,
             IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
         )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
+        }
+
         viewModel = ViewModelProvider(this, UserViewModelFactory(10)).get(UserViewModel::class.java)
 //        binding.btnCheckUser.setOnClickListener {
 //            val username = binding.etName.text.toString()
@@ -50,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         binding.btnCheckUser.setOnClickListener {
             contract.launch(binding.etName.text.toString())
             increaseCounter()
-            setResourcesStringText()
         }
 
         binding.btnRedirect.setOnClickListener {
@@ -75,7 +83,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnStartSerivce.setOnClickListener {
+            startMyRunningSerive()
+        }
+
+        binding.btnStopService.setOnClickListener {
+            stopMyRunningService()
+        }
     }
+
+
 
 
     private fun increaseCounter() {
@@ -88,8 +105,18 @@ class MainActivity : AppCompatActivity() {
         binding.tvCount.text = "Counter:- ${viewModel.count.toString()}"
     }
 
-    private fun setResourcesStringText() {
-        binding.tvLoremIpsum.text = resources.getString(R.string.lorem_ipsum)
+    private fun startMyRunningSerive() {
+        Intent(applicationContext,RunningService::class.java).also {
+            it.action = RunningService.Actions.START.toString()
+            startService(it)
+        }
+    }
+
+    private fun stopMyRunningService() {
+        Intent(applicationContext,RunningService::class.java).also {
+            it.action = RunningService.Actions.STOP.toString()
+            startService(it)
+        }
     }
 
 
