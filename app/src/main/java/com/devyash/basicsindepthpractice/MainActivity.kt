@@ -2,11 +2,15 @@ package com.devyash.basicsindepthpractice
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.content.ContentUris
 import android.content.Intent
 import android.content.IntentFilter
+import android.media.Image
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -15,8 +19,10 @@ import com.devyash.basicsindepthpractice.BroadcastReciever.AirPlaneModeReceiver
 import com.devyash.basicsindepthpractice.Constants.TAG
 import com.devyash.basicsindepthpractice.databinding.ActivityMainBinding
 import com.devyash.basicsindepthpractice.services.RunningService
+import com.devyash.basicsindepthpractice.viewmodels.ImageViewModel
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModel
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModelFactory
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     private val contract = registerForActivityResult(Contract()) {
         binding.tvCheckUserExist.text = it
     }
+
+//    private lateinit var imagesViewModel:ImageViewModel
 
     private lateinit var viewModel: UserViewModel
     private val airPlaneModeReceiver = AirPlaneModeReceiver()
@@ -38,8 +46,51 @@ class MainActivity : AppCompatActivity() {
             IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
         )
 
+//        imagesViewModel = ViewModelProvider(this).get(ImageViewModel::class.java)
+
+//        val projection = arrayOf(
+//            MediaStore.Images.Media._ID,
+//            MediaStore.Images.Media.DISPLAY_NAME
+//        )
+//
+//        val millisYesterday = Calendar.getInstance().apply {
+//            add(Calendar.DAY_OF_YEAR, -1)
+//        }.timeInMillis
+//
+//        val selection = "${MediaStore.Images.Media.DATE_TAKEN} >= ?"
+//        val selectionArgs = arrayOf(millisYesterday.toString())
+//
+//        val sortOrder = "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+
+//        contentResolver.query(
+//            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//            projection,
+//            selection,
+//            selectionArgs,
+//            sortOrder
+//        )?.use { cursor ->
+//            val idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID)
+//            val nameColumn = cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)
+//
+//            val images = mutableListOf<com.devyash.basicsindepthpractice.Image>()
+//
+//            while (cursor.moveToNext()) {
+//                val id = cursor.getLong(idColumn)
+//                val name = cursor.getString(nameColumn)
+//                val uri =
+//                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+//
+//                images.add(Image(id,name,uri))
+//            }
+//            imagesViewModel.updateImages(images)
+//        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                0
+            )
         }
 
         viewModel = ViewModelProvider(this, UserViewModelFactory(10)).get(UserViewModel::class.java)
@@ -93,8 +144,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun increaseCounter() {
         viewModel.increaseCount()
         Log.d(TAG, "increaseCounter: ${viewModel.count}")
@@ -106,14 +155,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startMyRunningSerive() {
-        Intent(applicationContext,RunningService::class.java).also {
+        Intent(applicationContext, RunningService::class.java).also {
             it.action = RunningService.Actions.START.toString()
             startService(it)
         }
     }
 
     private fun stopMyRunningService() {
-        Intent(applicationContext,RunningService::class.java).also {
+        Intent(applicationContext, RunningService::class.java).also {
             it.action = RunningService.Actions.STOP.toString()
             startService(it)
         }
@@ -183,3 +232,9 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onDestroy: Calling Main Activity")
     }
 }
+
+data class Image(
+    val id: Long,
+    val name: String,
+    val uri: Uri
+)
