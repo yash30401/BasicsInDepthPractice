@@ -14,6 +14,7 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModelProvider
 import com.devyash.basicsindepthpractice.BroadcastReciever.AirPlaneModeReceiver
 import com.devyash.basicsindepthpractice.Constants.TAG
@@ -22,7 +23,16 @@ import com.devyash.basicsindepthpractice.services.RunningService
 import com.devyash.basicsindepthpractice.viewmodels.ImageViewModel
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModel
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.Calendar
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class MainActivity : AppCompatActivity() {
 
@@ -141,6 +151,28 @@ class MainActivity : AppCompatActivity() {
         binding.btnStopService.setOnClickListener {
             stopMyRunningService()
         }
+
+//        GlobalScope.launch(Dispatchers.IO) {
+//            val result = performNetworkCall()
+//            Log.d("SUSPENDCANCELLABLE",result.toString())
+//        }
+
+//        GlobalScope.launch(Dispatchers.IO) {
+//            val result = performNetworkCallWithSuspendCancellableCoroutine()
+//            Log.d(
+//                "SUSPENDCANCELLABLE",
+//                "First Result:- ${result.first}\nSecond Result:- ${result.second}"
+//            )
+//        }
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val result = performNetworkCallWithAsyncAwait()
+            Log.d(
+                "SUSPENDCANCELLABLE",
+                "First Result:- ${result.first}\nSecond Result:- ${result.second}"
+            )
+        }
+
     }
 
 
@@ -231,7 +263,82 @@ class MainActivity : AppCompatActivity() {
         unregisterReceiver(airPlaneModeReceiver)
         Log.d(TAG, "onDestroy: Calling Main Activity")
     }
+
+
+//    suspend fun fetchDataFromNetwork():String{
+//        Log.d("SUSPENDCANCELLABLE","Fetching Started")
+//        delay(10000)
+//        return "Hello :- Data is here"
+//    }
+//
+//     suspend fun performNetworkCall():String{
+//        return suspendCancellableCoroutine { continuation ->
+//            GlobalScope.launch {
+//                Log.d("SUSPENDCANCELLABLE","Before Fecthed Data")
+//                val data = fetchDataFromNetwork()
+//                continuation.resume(data)
+//                Log.d("SUSPENDCANCELLABLE","After Fetched Data")
+//            }
+//
+//        }
+//    }
+
+
+    suspend fun fecthDataFromNetwork1(): String {
+        delay(5000)
+        return "Data 1 Is Here"
+    }
+
+    suspend fun fetchDataFromNetwork2(): String {
+        delay(10000)
+        return "Data 2 Is Here"
+    }
+
+    suspend fun performNetworkCallWithSuspendCancellableCoroutine(): Pair<String, String> {
+        return suspendCancellableCoroutine { continuation ->
+            GlobalScope.launch {
+                try {
+                    Log.d("SUSPENDCANCELLABLE", "Inside Try Block")
+                    Log.d("SUSPENDCANCELLABLE", "Data1 Is Fetching")
+                    val data1 = fecthDataFromNetwork1()
+                    Log.d("SUSPENDCANCELLABLE", "Data2 Is Fetching")
+                    val data2 = fetchDataFromNetwork2()
+
+                    // Here we can see data1 is fetched and then it moved to fetch data2.
+
+                    Log.d("SUSPENDCANCELLABLE", "Fetching Completed")
+
+                    continuation.resume(Pair(data1, data2))
+                } catch (e: Throwable) {
+                    continuation.resumeWithException(e)
+                }
+            }
+        }
+    }
+
+    suspend fun performNetworkCallWithAsyncAwait(): Pair<String, String> {
+        return coroutineScope {
+            Log.d("SUSPENDCANCELLABLE", "Inside Coroutine Block")
+            Log.d("SUSPENDCANCELLABLE", "Data1 Is Fetching")
+            val deferredData1 = async { fecthDataFromNetwork1() }
+            Log.d("SUSPENDCANCELLABLE", "Data2 Is Fetching")
+            val deferredData2 = async { fetchDataFromNetwork2() }
+
+            // Here we can both the network calls starts fetching the data parallely.
+
+            Log.d("SUSPENDCANCELLABLE", "Before Await")
+
+            val data1 = deferredData1.await()
+            val data2 = deferredData2.await()
+
+            Log.d("SUSPENDCANCELLABLE", "After Await")
+            Log.d("SUSPENDCANCELLABLE", "Fetching Completed")
+
+            Pair(data1, data2)
+        }
+    }
 }
+
 
 data class Image(
     val id: Long,
