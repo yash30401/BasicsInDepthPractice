@@ -268,6 +268,11 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onDestroy: Calling Main Activity")
     }
 
+/*
+*  Fetching Data From Single Network Call
+*  suspendabeCancellableCoroutine suspends at suspendabeCancellableCoroutine and wait for the result and and won't move forward
+*  until and unless result is available.
+* */
 
 //    suspend fun fetchDataFromNetwork():String{
 //        Log.d(SUSPENDCANCELLABLE,"Fetching Started")
@@ -287,6 +292,14 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
+
+    /*
+    * Here we are watching the behaviour of Aysnc/Await and suspendableCancellableCoroutine
+    * Fetching data through two networkcalls
+    * CASE 1:- In this case suspendCancellableCoroutine suspend at first network call and wait for the result after the result is
+    * available then only it move to the next network call.
+    * CASE 2:- In this case Async/Await make both the network calls simultaneously and will return the result as soon as they get it.
+    * */
 
     suspend fun fecthDataFromNetwork1(): String {
         delay(5000)
