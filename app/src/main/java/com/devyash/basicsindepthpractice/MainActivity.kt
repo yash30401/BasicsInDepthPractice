@@ -299,6 +299,8 @@ class MainActivity : AppCompatActivity() {
     * CASE 1:- In this case suspendCancellableCoroutine suspend at first network call and wait for the result after the result is
     * available then only it move to the next network call.
     * CASE 2:- In this case Async/Await make both the network calls simultaneously and will return the result as soon as they get it.
+    *
+    * Both can be used based on your needs whether u want to become wait for one network call or u want to make both calls simultaneously.
     * */
 
     suspend fun fecthDataFromNetwork1(): String {
