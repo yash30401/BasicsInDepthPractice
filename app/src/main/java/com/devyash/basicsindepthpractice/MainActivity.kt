@@ -177,8 +177,11 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
+
+
     }
 
+    // ----------------------------------------------------------------------------------------------------------------------------
 
     private fun increaseCounter() {
         viewModel.increaseCount()
@@ -189,6 +192,8 @@ class MainActivity : AppCompatActivity() {
     private fun setText() {
         binding.tvCount.text = "Counter:- ${viewModel.count.toString()}"
     }
+
+    // ----------------------------------------------------------------------------------------------------------------------------
 
     private fun startMyRunningSerive() {
         Intent(applicationContext, RunningService::class.java).also {
@@ -204,6 +209,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // ----------------------------------------------------------------------------------------------------------------------------
 
     // Trying onActivityResult Here Old Method
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -215,58 +221,7 @@ class MainActivity : AppCompatActivity() {
 //
 //    }
 
-    /* onStart():-
-*  A Activity is called to be started when it is visible to the user.
-*  But user can't interact with activity at this point.
-* */
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart: Calling Main Activity")
-    }
-
-    /* onResume():-
-    *  It is now visible to the user and user can interact with it.
-    *  It will go into the onPause() state if there is any activity, dialog or anything come into the foreground.
-    * */
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume: Calling Main Activity")
-    }
-
-    /* onPause():-
-    *  It will go into the onPause() state if there is any activity, dialog or anything come into the foreground.
-    * */
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause: Calling Main Activity")
-    }
-
-    /* onStop():-
-    *  At this point whole Activity is not visible to the user.
-    * */
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop: Calling Main Activity")
-    }
-
-    /* onRestart():-
-    *  When an user comes back from the another activity or from the minimized state then in this case Activity will be Restarted.
-    * */
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(TAG, "onRestart: Calling Main Activity")
-    }
-
-    /* onDestoryed():-
-    *  All resources should be released here or should have already been released in onStop().
-    *  On global configurartion changes onDestroy will be called. ex(Screen Rotation)
-    * */
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-        unregisterReceiver(airPlaneModeReceiver)
-        Log.d(TAG, "onDestroy: Calling Main Activity")
-    }
+    // ----------------------------------------------------------------------------------------------------------------------------
 
 /*
 *  Fetching Data From Single Network Call
@@ -292,6 +247,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
+    // ----------------------------------------------------------------------------------------------------------------------------
 
     /*
     * Here we are watching the behaviour of Aysnc/Await and suspendableCancellableCoroutine
@@ -355,6 +311,61 @@ class MainActivity : AppCompatActivity() {
 
             Pair(data1, data2)
         }
+    }
+
+    // ----------------------------------------------------------------------------------------------------------------------------
+
+    /* onStart():-
+*  A Activity is called to be started when it is visible to the user.
+*  But user can't interact with activity at this point.
+* */
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart: Calling Main Activity")
+    }
+
+    /* onResume():-
+    *  It is now visible to the user and user can interact with it.
+    *  It will go into the onPause() state if there is any activity, dialog or anything come into the foreground.
+    * */
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: Calling Main Activity")
+    }
+
+    /* onPause():-
+    *  It will go into the onPause() state if there is any activity, dialog or anything come into the foreground.
+    * */
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause: Calling Main Activity")
+    }
+
+    /* onStop():-
+    *  At this point whole Activity is not visible to the user.
+    * */
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop: Calling Main Activity")
+    }
+
+    /* onRestart():-
+    *  When an user comes back from the another activity or from the minimized state then in this case Activity will be Restarted.
+    * */
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart: Calling Main Activity")
+    }
+
+    /* onDestoryed():-
+*  All resources should be released here or should have already been released in onStop().
+*  On global configurartion changes onDestroy will be called. ex(Screen Rotation)
+* */
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        unregisterReceiver(airPlaneModeReceiver)
+        Log.d(TAG, "onDestroy: Calling Main Activity")
     }
 }
 
