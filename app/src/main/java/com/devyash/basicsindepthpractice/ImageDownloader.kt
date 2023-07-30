@@ -25,7 +25,7 @@ class ImageDownloader {
     private suspend fun downloadImage(imageUrl: String): String {
 
         // Simulating download time
-        delay(Random.nextLong(1000, 3000))
+        delay(Random.nextLong(1000, 5000))
 
         // Simulating occasional download failure
         if (Random.nextBoolean()) {
@@ -53,7 +53,7 @@ class ImageDownloader {
                     downloadImage(it)
                 }catch (e: Exception) {
                     // Handle the exception for each image
-                    println("Failed to download $imagesUrl: ${e.message}")
+                    Log.d(SUPERVISORSCOPETEST,"Failed to download $imagesUrl: ${e.message}")
                     "Failed to download $imagesUrl"
                 }
             }

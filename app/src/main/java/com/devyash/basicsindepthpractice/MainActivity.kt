@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModelProvider
 import com.devyash.basicsindepthpractice.BroadcastReciever.AirPlaneModeReceiver
+import com.devyash.basicsindepthpractice.Constants.SUPERVISORSCOPETEST
 import com.devyash.basicsindepthpractice.Constants.SUSPENDCANCELLABLE
 import com.devyash.basicsindepthpractice.Constants.TAG
 import com.devyash.basicsindepthpractice.databinding.ActivityMainBinding
@@ -47,6 +48,9 @@ class MainActivity : AppCompatActivity() {
 
 //    private lateinit var imagesViewModel:ImageViewModel
 
+
+    private lateinit var imageDownloader: ImageDownloader
+
     private lateinit var viewModel: UserViewModel
     private val airPlaneModeReceiver = AirPlaneModeReceiver()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +63,9 @@ class MainActivity : AppCompatActivity() {
         )
 
         lifecycle.addObserver(Car())
+
+
+        imageDownloader = ImageDownloader()
 
 //        imagesViewModel = ViewModelProvider(this).get(ImageViewModel::class.java)
 
@@ -169,15 +176,24 @@ class MainActivity : AppCompatActivity() {
 //            )
 //        }
 
+//        GlobalScope.launch(Dispatchers.IO) {
+//            val result = performNetworkCallWithAsyncAwait()
+//            Log.d(
+//                SUSPENDCANCELLABLE,
+//                "First Result:- ${result.first}\nSecond Result:- ${result.second}"
+//            )
+//        }
+
+//        GlobalScope.launch(Dispatchers.IO) {
+//            val downloadImagesWithScope = imageDownloader.downloadImagesWithCoroutineScope()
+//            Log.d(SUPERVISORSCOPETEST,"Downloaded images with coroutineScope: $downloadImagesWithScope")
+//        }
+
+
         GlobalScope.launch(Dispatchers.IO) {
-            val result = performNetworkCallWithAsyncAwait()
-            Log.d(
-                SUSPENDCANCELLABLE,
-                "First Result:- ${result.first}\nSecond Result:- ${result.second}"
-            )
+            val downloadImagesWithSupervisor = imageDownloader.downloadImagesWithSupervisorScope()
+            Log.d(SUPERVISORSCOPETEST,"Downloaded images with supervisorScope: $downloadImagesWithSupervisor")
         }
-
-
 
     }
 
