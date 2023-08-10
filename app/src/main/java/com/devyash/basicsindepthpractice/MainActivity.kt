@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.viewModels
@@ -363,6 +364,22 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "onStop: Calling Main Activity")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        Log.d(TAG,"OnSaveInstanceState")
+        outState.putString("ONSAVETESTING","Saving value 1")
+    }
+
+    override fun onRestoreInstanceState(
+        savedInstanceState: Bundle?,
+        persistentState: PersistableBundle?
+    ) {
+        super.onRestoreInstanceState(savedInstanceState, persistentState)
+        Log.d(TAG,"onRestoreInstanceState")
+        val value = savedInstanceState?.get("ONSAVETESTING")
+        Log.d(TAG,"onRestoreInstanceState Value:- $value")
     }
 
     /* onRestart():-
