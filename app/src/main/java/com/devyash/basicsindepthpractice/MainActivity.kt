@@ -366,12 +366,15 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onStop: Calling Main Activity")
     }
 
+
+    // Saving using onSaveInstanceState at config changes
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         Log.d(TAG,"OnSaveInstanceState")
         outState.putString("ONSAVETESTING","Saving value 1")
     }
 
+    // Getting values back in onRestoreInstanceState
     override fun onRestoreInstanceState(
         savedInstanceState: Bundle?,
         persistentState: PersistableBundle?
