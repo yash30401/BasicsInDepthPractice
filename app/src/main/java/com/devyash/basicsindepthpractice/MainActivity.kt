@@ -3,6 +3,7 @@ package com.devyash.basicsindepthpractice
 import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.ContentUris
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.media.Image
@@ -195,6 +196,12 @@ class MainActivity : AppCompatActivity() {
             val downloadImagesWithSupervisor = imageDownloader.downloadImagesWithSupervisorScope()
             Log.d(SUPERVISORSCOPETEST,"Downloaded images with supervisorScope: $downloadImagesWithSupervisor")
         }
+
+        saveSomeDataUsingDataStoreApi()
+
+    }
+
+    private fun saveSomeDataUsingDataStoreApi() {
 
     }
 
