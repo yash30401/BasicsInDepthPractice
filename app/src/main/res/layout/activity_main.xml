@@ -78,7 +78,17 @@
         app:layout_constraintStart_toStartOf="@+id/btnStartSerivce"
         app:layout_constraintTop_toBottomOf="@+id/btnStartSerivce" />
 
-<!--    <TextView-->
+    <Button
+        android:id="@+id/btnVisitDataStoreActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="DataStore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStopService" />
+
+    <!--    <TextView-->
 <!--        android:id="@+id/tvImages"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

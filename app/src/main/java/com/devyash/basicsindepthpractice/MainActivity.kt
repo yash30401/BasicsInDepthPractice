@@ -199,6 +199,12 @@ class MainActivity : AppCompatActivity() {
 
         saveSomeDataUsingDataStoreApi()
 
+        binding.btnVisitDataStoreActivity.setOnClickListener {
+            Intent(this@MainActivity,DataStoreApiStore::class.java).also {
+                startActivity(it)
+            }
+        }
+
     }
 
     private fun saveSomeDataUsingDataStoreApi() {
