@@ -23,6 +23,8 @@ import com.devyash.basicsindepthpractice.Constants.SUPERVISORSCOPETEST
 import com.devyash.basicsindepthpractice.Constants.SUSPENDCANCELLABLE
 import com.devyash.basicsindepthpractice.Constants.TAG
 import com.devyash.basicsindepthpractice.databinding.ActivityMainBinding
+import com.devyash.basicsindepthpractice.models.NetworkData
+import com.devyash.basicsindepthpractice.models.UserMapper
 import com.devyash.basicsindepthpractice.services.RunningService
 import com.devyash.basicsindepthpractice.viewmodels.ImageViewModel
 import com.devyash.basicsindepthpractice.viewmodels.UserViewModel
@@ -204,6 +206,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(it)
             }
         }
+
+        val networkData = NetworkData(12134,"Yashveer Singh",21,true,"Aligarh","India")
+
+        val user = UserMapper().fromNetworkToUserMapper(networkData)
+
+        binding.tvMappingText.text = "Name:- ${user.name}\nAge:-${user.age}\nHave License:-${if(user.haveLicense) "Yes I have" else "No I don't have"}"
 
     }
 
