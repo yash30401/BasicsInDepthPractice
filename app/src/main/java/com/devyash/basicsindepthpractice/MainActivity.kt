@@ -199,7 +199,6 @@ class MainActivity : AppCompatActivity() {
             Log.d(SUPERVISORSCOPETEST,"Downloaded images with supervisorScope: $downloadImagesWithSupervisor")
         }
 
-        saveSomeDataUsingDataStoreApi()
 
         binding.btnVisitDataStoreActivity.setOnClickListener {
             Intent(this@MainActivity,DataStoreApiStore::class.java).also {
@@ -212,10 +211,6 @@ class MainActivity : AppCompatActivity() {
         val user = UserMapper().fromNetworkToUserMapper(networkData)
 
         binding.tvMappingText.text = "Name:- ${user.name}\nAge:-${user.age}\nHave License:-${if(user.haveLicense) "Yes I have" else "No I don't have"}"
-
-    }
-
-    private fun saveSomeDataUsingDataStoreApi() {
 
     }
 
