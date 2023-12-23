@@ -9,5 +9,5 @@ object Constants {
 
     const val SUPERVISORSCOPETEST = "SUPERVISORSCOPETEST"
 
-
+    const val SHAREDSTATEFLOW = "SHAREDSTATEFLOW"
 }
