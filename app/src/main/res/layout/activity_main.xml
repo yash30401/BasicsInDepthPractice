@@ -98,5 +98,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnStopService" />
 
+    <Button
+        android:id="@+id/btnThirdActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Third Activity"
+        app:layout_constraintEnd_toEndOf="@+id/btnVisitDataStoreActivity"
+        app:layout_constraintStart_toStartOf="@+id/btnVisitDataStoreActivity"
+        app:layout_constraintTop_toBottomOf="@+id/btnVisitDataStoreActivity" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

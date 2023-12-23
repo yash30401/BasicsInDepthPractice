@@ -212,6 +212,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.tvMappingText.text = "Name:- ${user.name}\nAge:-${user.age}\nHave License:-${if(user.haveLicense) "Yes I have" else "No I don't have"}"
 
+        binding.btnThirdActivity.setOnClickListener{
+            startActivity(Intent(this@MainActivity,ThirdActivity::class.java))
+        }
+
     }
 
     // ----------------------------------------------------------------------------------------------------------------------------
