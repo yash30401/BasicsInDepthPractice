@@ -27,6 +27,7 @@ class ThirdActivity : AppCompatActivity() {
 
     }
 
+    // Difference Between SharedFlow And StateFlow
     private fun startSharedFlow() {
         val sharedFlow = MutableSharedFlow<Int>()
 
