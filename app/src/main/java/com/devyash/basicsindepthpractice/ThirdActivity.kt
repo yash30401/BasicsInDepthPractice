@@ -1,11 +1,17 @@
 package com.devyash.basicsindepthpractice
 
+import android.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
 import com.devyash.basicsindepthpractice.Constants.SHAREDSTATEFLOW
 import com.devyash.basicsindepthpractice.databinding.ActivityThirdBinding
+import com.devyash.basicsindepthpractice.fragments.FragmentOne
+import com.devyash.basicsindepthpractice.fragments.FragmentTwo
+import com.devyash.basicsindepthpractice.models.SharedViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +22,7 @@ class ThirdActivity : AppCompatActivity() {
     private var _binding:ActivityThirdBinding?=null
     private val binding  get()= _binding!!
 
-
+    lateinit var sharedViewModel: SharedViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityThirdBinding.inflate(layoutInflater)
@@ -24,6 +30,16 @@ class ThirdActivity : AppCompatActivity() {
 
         startSharedFlow()
         startStateFlow()
+
+        binding.btnFragOne.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.fragContainer,FragmentOne()).addToBackStack(null).commit()
+        }
+
+        binding.btnFragTwo.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.fragContainer,FragmentTwo()).addToBackStack(null).commit()
+        }
+
+        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
     }
 
