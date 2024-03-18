@@ -167,6 +167,12 @@ class MainActivity : AppCompatActivity() {
             stopMyRunningService()
         }
 
+        binding.btnCoroutineActivity.setOnClickListener {
+            Intent(this, CoroutinePracActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
 //        GlobalScope.launch(Dispatchers.IO) {
 //            val result = performNetworkCall()
 //            Log.d(SUSPENDCANCELLABLE,result.toString())
@@ -196,24 +202,28 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             val downloadImagesWithSupervisor = imageDownloader.downloadImagesWithSupervisorScope()
-            Log.d(SUPERVISORSCOPETEST,"Downloaded images with supervisorScope: $downloadImagesWithSupervisor")
+            Log.d(
+                SUPERVISORSCOPETEST,
+                "Downloaded images with supervisorScope: $downloadImagesWithSupervisor"
+            )
         }
 
 
         binding.btnVisitDataStoreActivity.setOnClickListener {
-            Intent(this@MainActivity,DataStoreApiStore::class.java).also {
+            Intent(this@MainActivity, DataStoreApiStore::class.java).also {
                 startActivity(it)
             }
         }
 
-        val networkData = NetworkData(12134,"Yashveer Singh",21,true,"Aligarh","India")
+        val networkData = NetworkData(12134, "Yashveer Singh", 21, true, "Aligarh", "India")
 
         val user = UserMapper().fromNetworkToUserMapper(networkData)
 
-        binding.tvMappingText.text = "Name:- ${user.name}\nAge:-${user.age}\nHave License:-${if(user.haveLicense) "Yes I have" else "No I don't have"}"
+        binding.tvMappingText.text =
+            "Name:- ${user.name}\nAge:-${user.age}\nHave License:-${if (user.haveLicense) "Yes I have" else "No I don't have"}"
 
-        binding.btnThirdActivity.setOnClickListener{
-            startActivity(Intent(this@MainActivity,ThirdActivity::class.java))
+        binding.btnThirdActivity.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ThirdActivity::class.java))
         }
 
     }
@@ -260,11 +270,11 @@ class MainActivity : AppCompatActivity() {
 
     // ----------------------------------------------------------------------------------------------------------------------------
 
-/*
-*  Fetching Data From Single Network Call
-*  suspendabeCancellableCoroutine suspends at suspendabeCancellableCoroutine and wait for the result and and won't move forward
-*  until and unless result is available.
-* */
+    /*
+    *  Fetching Data From Single Network Call
+    *  suspendabeCancellableCoroutine suspends at suspendabeCancellableCoroutine and wait for the result and and won't move forward
+    *  until and unless result is available.
+    * */
 
 //    suspend fun fetchDataFromNetwork():String{
 //        Log.d(SUSPENDCANCELLABLE,"Fetching Started")
@@ -390,8 +400,8 @@ class MainActivity : AppCompatActivity() {
     // Saving using onSaveInstanceState at config changes
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
-        Log.d(TAG,"OnSaveInstanceState")
-        outState.putString("ONSAVETESTING","Saving value 1")
+        Log.d(TAG, "OnSaveInstanceState")
+        outState.putString("ONSAVETESTING", "Saving value 1")
     }
 
     // Getting values back in onRestoreInstanceState
@@ -400,9 +410,9 @@ class MainActivity : AppCompatActivity() {
         persistentState: PersistableBundle?
     ) {
         super.onRestoreInstanceState(savedInstanceState, persistentState)
-        Log.d(TAG,"onRestoreInstanceState")
+        Log.d(TAG, "onRestoreInstanceState")
         val value = savedInstanceState?.get("ONSAVETESTING")
-        Log.d(TAG,"onRestoreInstanceState Value:- $value")
+        Log.d(TAG, "onRestoreInstanceState Value:- $value")
     }
 
     /* onRestart():-
