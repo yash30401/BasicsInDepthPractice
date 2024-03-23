@@ -85,6 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:textAlignment="center"
                 android:text="Exception Handling In Coroutine"
                 app:layout_constraintEnd_toEndOf="@+id/btnParallely"
                 app:layout_constraintStart_toStartOf="@+id/btnOneByOne"
