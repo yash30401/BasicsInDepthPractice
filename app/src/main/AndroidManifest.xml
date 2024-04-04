@@ -27,6 +27,9 @@
         android:theme="@style/Theme.BasicsInDepthPractice"
         tools:targetApi="31">
         <activity
+            android:name=".FlowsPrac"
+            android:exported="false" />
+        <activity
             android:name=".CoroutinePracActivity"
             android:exported="false"
             android:theme="@style/Theme.BasicsInDepthPractice" />

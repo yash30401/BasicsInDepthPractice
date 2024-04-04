@@ -173,6 +173,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnFlowsPrac.setOnClickListener {
+            Intent(this,FlowsPrac::class.java).also {
+                startActivity(it)
+            }
+        }
+
 //        GlobalScope.launch(Dispatchers.IO) {
 //            val result = performNetworkCall()
 //            Log.d(SUSPENDCANCELLABLE,result.toString())

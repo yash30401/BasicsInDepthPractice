@@ -82,7 +82,7 @@
         android:id="@+id/btnVisitDataStoreActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:text="DataStore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +117,18 @@
         app:layout_constraintEnd_toEndOf="@+id/btnThirdActivity"
         app:layout_constraintStart_toStartOf="@+id/btnThirdActivity"
         app:layout_constraintTop_toBottomOf="@+id/btnThirdActivity" />
+
+    <Button
+        android:id="@+id/btnFlowsPrac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="164dp"
+        android:text="FlowsPrac"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCoroutineActivity" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
