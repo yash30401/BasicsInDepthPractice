@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class FlowsPrac : AppCompatActivity() {
@@ -27,6 +28,8 @@ class FlowsPrac : AppCompatActivity() {
         lifecycleScope.launch {
             collectPersons.filter {
                 it.age > 30
+            }.map {
+                it.copy(it.name,it.age,it.address,it.job,it.salary+20)
             }.collect { person ->
 
                 Log.d("FLOWSPRAC", person.toString())
